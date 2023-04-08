@@ -1,3 +1,3 @@
 # menu-checkout
-A menu driven checkout GUI that implement OOP concepts written in Java<br>
-Perancangan Perangkat Lunak 2
+A GUI driven checkout menu that implement OOP concepts written in Java ☕<br>
+👨‍💻Project Perancangan Perangkat Lunak 2
