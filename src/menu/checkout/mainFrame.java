@@ -7,6 +7,10 @@ package menu.checkout;
 public class mainFrame extends javax.swing.JFrame {
     public mainFrame() {
         initComponents();
+        //add radio button into same group, therefore only one radio box can selected at same time in same group
+        paymentMethodGroup.add(cashRadioButton);
+        paymentMethodGroup.add(bniSyariahCardRadioButton);
+        paymentMethodGroup.add(muamalatCardRadioButton);
     }
     
     /**
@@ -31,14 +35,14 @@ public class mainFrame extends javax.swing.JFrame {
         esJerukTextField = new javax.swing.JTextField();
         esTehTextField = new javax.swing.JTextField();
         paymenMethodPanel = new javax.swing.JPanel();
-        caraBayarLabel = new javax.swing.JLabel();
+        caraBayarUpLabel = new javax.swing.JLabel();
         cashRadioButton = new javax.swing.JRadioButton();
         muamalatCardRadioButton = new javax.swing.JRadioButton();
         bniSyariahCardRadioButton = new javax.swing.JRadioButton();
         hitungButton = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
         totalLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        caraBayarDownLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Warung Menu");
@@ -61,6 +65,11 @@ public class mainFrame extends javax.swing.JFrame {
         sateMaduraCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         sateMaduraCheckBox.setMnemonic('M');
         sateMaduraCheckBox.setText("Sate Madura     | Rp. 10.000");
+        sateMaduraCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sateMaduraCheckBoxActionPerformed(evt);
+            }
+        });
 
         esJerukCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         esJerukCheckBox.setMnemonic('J');
@@ -74,19 +83,32 @@ public class mainFrame extends javax.swing.JFrame {
         esTehCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         esTehCheckBox.setMnemonic('T');
         esTehCheckBox.setText("Es Teh               | Rp. 3.500");
+        esTehCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                esTehCheckBoxActionPerformed(evt);
+            }
+        });
 
+        sotoBanjarTextField.setEditable(false);
         sotoBanjarTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        sotoBanjarTextField.setText("0");
 
+        sateMaduraTextField.setEditable(false);
         sateMaduraTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        sateMaduraTextField.setText("0");
 
+        esJerukTextField.setEditable(false);
         esJerukTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        esJerukTextField.setText("0");
 
+        esTehTextField.setEditable(false);
         esTehTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        esTehTextField.setText("0");
 
         paymenMethodPanel.setForeground(new java.awt.Color(0, 0, 0));
 
-        caraBayarLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        caraBayarLabel.setText("Cara Bayar");
+        caraBayarUpLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        caraBayarUpLabel.setText("Cara Bayar");
 
         cashRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cashRadioButton.setSelected(true);
@@ -104,7 +126,7 @@ public class mainFrame extends javax.swing.JFrame {
             paymenMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paymenMethodPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(caraBayarLabel)
+                .addComponent(caraBayarUpLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paymenMethodPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -118,7 +140,7 @@ public class mainFrame extends javax.swing.JFrame {
             paymenMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paymenMethodPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(caraBayarLabel)
+                .addComponent(caraBayarUpLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cashRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,14 +151,24 @@ public class mainFrame extends javax.swing.JFrame {
         );
 
         hitungButton.setText("Hitung");
+        hitungButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hitungButtonActionPerformed(evt);
+            }
+        });
 
         clearButton.setText("Kosongkan");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
 
         totalLabel.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         totalLabel.setText("Rp. 0");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Cara Bayar");
+        caraBayarDownLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        caraBayarDownLabel.setText("Cara Bayar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,7 +178,7 @@ public class mainFrame extends javax.swing.JFrame {
                 .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(caraBayarDownLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +242,7 @@ public class mainFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(paymenMethodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addComponent(caraBayarDownLabel)
                         .addGap(30, 30, 30))))
         );
 
@@ -219,11 +251,91 @@ public class mainFrame extends javax.swing.JFrame {
 
     private void sotoBanjarCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sotoBanjarCheckBoxActionPerformed
         // TODO add your handling code here:
+        // enable textbox while checkbox is enabled, and set text starting point into 1
+        // and vice versa
+        if(sotoBanjarCheckBox.isSelected()){
+            sotoBanjarTextField.setEditable(true);
+            sotoBanjarTextField.setText("1");
+        } else {
+            sotoBanjarTextField.setEditable(false);
+            sotoBanjarTextField.setText("0");
+        }
     }//GEN-LAST:event_sotoBanjarCheckBoxActionPerformed
 
     private void esJerukCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_esJerukCheckBoxActionPerformed
         // TODO add your handling code here:
+        if(esJerukCheckBox.isSelected()){
+            esJerukTextField.setEditable(true);
+            esJerukTextField.setText("1");
+        } else{
+            esJerukTextField.setEditable(false);
+            esJerukTextField.setText("0");
+        }
     }//GEN-LAST:event_esJerukCheckBoxActionPerformed
+
+    private void sateMaduraCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sateMaduraCheckBoxActionPerformed
+        // TODO add your handling code here:
+        if(sateMaduraCheckBox.isSelected()){
+            sateMaduraTextField.setEditable(true);
+            sateMaduraTextField.setText("1");
+        } else{
+            sateMaduraTextField.setEditable(false);
+            sateMaduraTextField.setText("0");
+        }
+    }//GEN-LAST:event_sateMaduraCheckBoxActionPerformed
+
+    private void esTehCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_esTehCheckBoxActionPerformed
+        // TODO add your handling code here:
+        if(esTehCheckBox.isSelected()){
+            esTehTextField.setEditable(true);
+            esTehTextField.setText("1");
+        } else{
+            esTehTextField.setEditable(false);
+            esTehTextField.setText("0");
+        }
+    }//GEN-LAST:event_esTehCheckBoxActionPerformed
+
+    private void hitungButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitungButtonActionPerformed
+        // TODO add your handling code here:
+        // convert(parsing) textField to integer, and assign it to nVariable(nSoto, nsate, etc.)
+        int nSoto = Integer.parseInt(sotoBanjarTextField.getText());        
+        int nSate = Integer.parseInt(sateMaduraTextField.getText());
+        int nEsTeh = Integer.parseInt(esTehTextField.getText());
+        int nEsJeruk = Integer.parseInt(esJerukTextField.getText());
+        // Sum total
+        int nTotal = (8_000*nSoto) + (10_000*nSate) + (4_000*nEsJeruk) + (3_500*nEsTeh);
+        totalLabel.setText("Rp. "+nTotal);
+        // Show payment method
+        if (cashRadioButton.isSelected()){
+            caraBayarDownLabel.setText(cashRadioButton.getActionCommand());
+        }
+        if (muamalatCardRadioButton.isSelected()){
+            caraBayarDownLabel.setText(muamalatCardRadioButton.getActionCommand());
+        }
+        if (bniSyariahCardRadioButton.isSelected()){
+            caraBayarDownLabel.setText(bniSyariahCardRadioButton.getActionCommand());
+        }
+    }//GEN-LAST:event_hitungButtonActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        // TODO add your handling code here:
+        //set up all menu text Label to 0, and uncheck all menu checklist
+        sotoBanjarCheckBox.setSelected(false);
+        sateMaduraCheckBox.setSelected(false);
+        esJerukCheckBox.setSelected(false);
+        esTehCheckBox.setSelected(false);
+        sotoBanjarTextField.setText("0");
+        sateMaduraTextField.setText("0");
+        esJerukTextField.setText("0");
+        esTehTextField.setText("0");
+        sotoBanjarTextField.setEditable(false);
+        sateMaduraTextField.setEditable(false);
+        esJerukTextField.setEditable(false);
+        esTehTextField.setEditable(false);
+        cashRadioButton.setSelected(true);
+        totalLabel.setText("Rp. 0");
+        caraBayarDownLabel.setText("Cara Bayar");
+    }//GEN-LAST:event_clearButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -260,7 +372,8 @@ public class mainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JumlahLabel;
     private javax.swing.JRadioButton bniSyariahCardRadioButton;
-    private javax.swing.JLabel caraBayarLabel;
+    private javax.swing.JLabel caraBayarDownLabel;
+    private javax.swing.JLabel caraBayarUpLabel;
     private javax.swing.JRadioButton cashRadioButton;
     private javax.swing.JButton clearButton;
     private javax.swing.JCheckBox esJerukCheckBox;
@@ -268,7 +381,6 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox esTehCheckBox;
     private javax.swing.JTextField esTehTextField;
     private javax.swing.JButton hitungButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel menuLabel;
     private javax.swing.JRadioButton muamalatCardRadioButton;
     private javax.swing.JPanel paymenMethodPanel;
