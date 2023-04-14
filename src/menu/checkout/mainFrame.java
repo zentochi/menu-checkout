@@ -307,19 +307,20 @@ public class mainFrame extends javax.swing.JFrame {
         totalLabel.setText("Rp. "+nTotal);
         // Show payment method
         if (cashRadioButton.isSelected()){
-            caraBayarDownLabel.setText(cashRadioButton.getActionCommand());
+            caraBayarDownLabel.setText(cashRadioButton.getActionCommand()+" payment");
         }
         if (muamalatCardRadioButton.isSelected()){
-            caraBayarDownLabel.setText(muamalatCardRadioButton.getActionCommand());
+            caraBayarDownLabel.setText(muamalatCardRadioButton.getActionCommand()+" Debit payment");
         }
         if (bniSyariahCardRadioButton.isSelected()){
-            caraBayarDownLabel.setText(bniSyariahCardRadioButton.getActionCommand());
+            caraBayarDownLabel.setText(bniSyariahCardRadioButton.getActionCommand()+ " Debit payment");
         }
     }//GEN-LAST:event_hitungButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         // TODO add your handling code here:
-        //set up all menu text Label to 0, and uncheck all menu checklist
+        //set up default value such as unchecked checkbox menu, textfield menu set to 0,
+        // payment method default is "cash", total label default is 0, and caraBayar label to "Cara Bayar"
         sotoBanjarCheckBox.setSelected(false);
         sateMaduraCheckBox.setSelected(false);
         esJerukCheckBox.setSelected(false);
